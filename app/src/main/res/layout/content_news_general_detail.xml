@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.duaruang.pnmportal.activity.NewsGeneralDetailActivity"
+    tools:showIn="@layout/activity_news_general_detail">
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/LinearLayout1">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardview_dashboard_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardElevation="10dp"
+                card_view:cardCornerRadius="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/rundown_icon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/iconnews" />
+
+                        <TextView
+                            android:id="@+id/news_general_detail_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/rundown_icon"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toEndOf="@+id/rundown_icon"
+                            android:text="Title"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            app:layout_gravity="fill_horizontal" />
+
+                        <TextView
+                            android:id="@+id/news_general_detail_tanggal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/rundown_icon"
+                            android:layout_toEndOf="@+id/rundown_icon"
+                            android:text="Tanggal"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/md_blue_500"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="12sp"
+                            app:layout_gravity="fill_horizontal" />
+
+
+                    </RelativeLayout>
+
+
+                    <com.duaruang.pnmportal.helper.WrapContentDraweeView
+                        android:layout_marginTop="7dp"
+                        android:id="@+id/news_general_detail_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_medium">
+
+                        <me.biubiubiu.justifytext.library.JustifyTextView
+                            android:id="@+id/news_general_detail_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingMultiplier="1.2"
+                            android:paddingBottom="@dimen/margin_small"
+                            android:text="@string/lorem_ipsum"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="left"
+                        android:paddingRight="10dp">
+                        <ImageView
+                            android:id="@+id/newsdownload"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="-10dp"
+                            android:visibility="gone"
+                            android:background="@drawable/download"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

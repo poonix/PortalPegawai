@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_profile_screen_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.duaruang.pnmportal.activity.ProfileScreenActivity">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/profile_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageButton
+                android:id="@+id/user_profile_photo"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="140dp"
+                android:background="@drawable/profile_circular_border"
+                android:elevation="5dp"
+                android:padding="20dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile" />
+
+            <RelativeLayout
+                android:id="@+id/profile_layout"
+                android:layout_width="match_parent"
+                android:layout_height="505dp"
+                android:background="@color/md_blue_400"
+                android:elevation="4dp"
+                android:paddingBottom="24dp">
+
+
+                <!--<ImageView-->
+                <!--android:id="@+id/add_friend"-->
+                <!--android:layout_width="30dp"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:layout_toLeftOf="@+id/drop_down_option_menu"-->
+                <!--android:src="@drawable/ic_action_user_add" />-->
+
+                <!--<ImageView-->
+                <!--android:id="@+id/drop_down_option_menu"-->
+                <!--android:layout_width="30dp"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:src="@drawable/ic_action_overflow" />-->
+
+                <TextView
+                    android:id="@+id/user_profile_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="276dp"
+                    android:text="John Doe"
+                    android:textColor="#fff"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/user_profile_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/user_profile_name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="12dp"
+                    android:text="user@email.com"
+                    android:textColor="#fff"
+                    android:textSize="14sp" />
+
+                <!--          <TextView
+                              android:id="@+id/tv_idsdm"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_below="@+id/user_profile_email"
+                              android:layout_centerHorizontal="true"
+                              android:layout_marginTop="12dp"
+                              android:text="B00000000000000000000"
+                              android:textColor="#fff"
+                              android:textSize="14sp" />
+          -->
+                <TextView
+                    android:id="@+id/tv_nik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/user_profile_email"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="12dp"
+                    android:text="11111111"
+                    android:textColor="#fff"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tv_posisi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_nik"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="12dp"
+                    android:text="karyawan"
+                    android:textColor="#fff"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_qr_layout"
+                android:layout_below="@+id/profile_layout"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btn_qr1"
+                    android:onClick="onButtonShowPopupQrClick"
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/latarijoo"
+                    android:textStyle="bold"
+                    android:padding="12dp"
+                    android:textColor="#ffffff"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_weight="1"
+
+                    android:text="QR 1" />
+                <!--<View-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_weight="1" />-->
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btn_qr2"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/latarijoo"
+                    android:textStyle="bold"
+                    android:padding="12dp"
+                    android:textColor="#ffffff"
+                    android:layout_weight="1"
+                    android:text="QR 2" />
+            </LinearLayout>
+
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/btn_qr_layout"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/tv_idsdm"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:gravity="center"-->
+            <!--android:padding="20dp"-->
+            <!--android:text="idsdm" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/tv_nik"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:gravity="center"-->
+            <!--android:padding="20dp"-->
+            <!--android:text="nik" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/tv_posisi"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:gravity="center"-->
+            <!--android:padding="20dp"-->
+            <!--android:text="posisi" />-->
+
+            <!--<ImageView android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:padding="20dp"-->
+            <!--android:id="@+id/imageBarcode"/>-->
+
+            <!--<TextView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:background="#fff"-->
+            <!--android:clickable="true"-->
+            <!--android:elevation="4dp"-->
+            <!--android:padding="20dp"-->
+            <!--android:text="Android Profile UI Design" />-->
+
+            <!--<TextView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:layout_marginBottom="3dp"-->
+            <!--android:layout_marginTop="3dp"-->
+            <!--android:background="#fff"-->
+            <!--android:clickable="true"-->
+            <!--android:elevation="4dp"-->
+            <!--android:padding="20dp"-->
+            <!--android:text="Android Profile XMl UI Design" />-->
+
+            <!--<TextView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:background="#fff"-->
+            <!--android:clickable="true"-->
+            <!--android:elevation="4dp"-->
+            <!--android:padding="20dp"-->
+            <!--android:text="Android Profile UI Design" />-->
+
+            <!--<TextView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:layout_marginBottom="3dp"-->
+            <!--android:layout_marginTop="3dp"-->
+            <!--android:background="#fff"-->
+            <!--android:clickable="true"-->
+            <!--android:elevation="4dp"-->
+            <!--android:padding="20dp"-->
+            <!--android:text="Android Profile XMl UI Design" />-->
+
+            <!--<TextView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:background="#fff"-->
+            <!--android:clickable="true"-->
+            <!--android:elevation="4dp"-->
+            <!--android:padding="20dp"-->
+            <!--android:text="Android Profile UI Design" />-->
+            <!--</LinearLayout>-->
+        </RelativeLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

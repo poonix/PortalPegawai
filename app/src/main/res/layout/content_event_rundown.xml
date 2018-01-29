@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.duaruang.pnmportal.activity.RundownActivity"
+    tools:showIn="@layout/activity_event_rundown">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- Editext for Search -->
+        <!--<EditText android:id="@+id/inputSearchFaq"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:hint="Search.."-->
+        <!--android:inputType="textVisiblePassword"-->
+        <!--android:layout_alignParentTop="true"/>-->
+        <TextView
+            android:id="@+id/tv_Judul_Rundown"
+            android:paddingTop="10dp"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:textColor="#505050"
+            android:layout_marginLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/materialize_typography_headline"
+            android:textStyle="bold"
+            android:text="Rundown"/>
+
+        <!-- List View -->
+        <View
+            android:id="@+id/border"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+
+            android:layout_marginTop="14dp"
+            android:background="#d3d3d3"/>
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_rundown"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/border"/>
+
+
+                <!--<android.support.v7.widget.CardView-->
+
+                <!--android:gravity="center"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:clickable="true"-->
+                <!--android:foreground="?android:attr/selectableItemBackground"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--card_view:cardCornerRadius="2dp"-->
+                <!--card_view:contentPadding="10dp"-->
+                <!--card_view:cardElevation="10dp">-->
+                <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="@dimen/margin_medium"-->
+                <!--android:gravity="center">-->
+                <!--<ImageView-->
+                <!--android:id="@+id/rundown_icon"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingLeft="10sp"-->
+                <!--android:paddingRight="10sp"-->
+                <!--app:ico_color="@color/md_blue_400"-->
+                <!--app:ico_icon="faw-clock-o"-->
+                <!--app:ico_size="30dp" >-->
+                <!--</ImageView>-->
+                <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_toEndOf="@+id/rundown_icon">-->
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_kegiatan"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:text="Nama Kegiatan"-->
+                <!--android:textSize="18sp"/>-->
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/tv_kegiatan"-->
+                <!--android:text="Speakers"-->
+                <!--android:textSize="12sp"/>-->
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentEnd="true"-->
+
+                <!--android:text="09.30 - 11.00"-->
+                <!--android:textSize="12sp"/>-->
+                <!--</RelativeLayout>-->
+                <!--</RelativeLayout>-->
+                <!--</android.support.v7.widget.CardView>-->
+
+                <!--<android.support.v7.widget.CardView-->
+
+                <!--android:gravity="center"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:clickable="true"-->
+                <!--android:foreground="?android:attr/selectableItemBackground"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--card_view:cardCornerRadius="2dp"-->
+                <!--card_view:contentPadding="10dp"-->
+                <!--card_view:cardElevation="10dp">-->
+                <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="@dimen/margin_medium"-->
+                <!--android:gravity="center">-->
+                <!--<ImageView-->
+                <!--android:id="@+id/rundown_icon1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingLeft="10sp"-->
+                <!--android:paddingRight="10sp"-->
+                <!--app:ico_color="@color/md_blue_400"-->
+                <!--app:ico_icon="faw-clock-o"-->
+                <!--app:ico_size="30dp" >-->
+                <!--</ImageView>-->
+                <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_toEndOf="@+id/rundown_icon1">-->
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_kegiatan1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:text="Nama Kegiatan"-->
+                <!--android:textSize="18sp"/>-->
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/tv_kegiatan1"-->
+                <!--android:text="Speakers"-->
+                <!--android:textSize="12sp"/>-->
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentEnd="true"-->
+
+                <!--android:text="09.30 - 11.00"-->
+                <!--android:textSize="12sp"/>-->
+                <!--</RelativeLayout>-->
+                <!--</RelativeLayout>-->
+                <!--</android.support.v7.widget.CardView>-->
+
+                <!--<android.support.v7.widget.CardView-->
+
+                <!--android:gravity="center"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:clickable="true"-->
+                <!--android:foreground="?android:attr/selectableItemBackground"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--card_view:cardCornerRadius="2dp"-->
+                <!--card_view:contentPadding="10dp"-->
+                <!--card_view:cardElevation="10dp">-->
+                <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="@dimen/margin_medium"-->
+                <!--android:gravity="center">-->
+                <!--<ImageView-->
+                <!--android:id="@+id/rundown_icon2"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingLeft="10sp"-->
+                <!--android:paddingRight="10sp"-->
+                <!--app:ico_color="@color/md_blue_400"-->
+                <!--app:ico_icon="faw-clock-o"-->
+                <!--app:ico_size="30dp" >-->
+                <!--</ImageView>-->
+                <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_toEndOf="@+id/rundown_icon2">-->
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_kegiatan2"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:text="Nama Kegiatan"-->
+                <!--android:textSize="18sp"/>-->
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/tv_kegiatan2"-->
+                <!--android:text="Speakers"-->
+                <!--android:textSize="12sp"/>-->
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentEnd="true"-->
+
+                <!--android:text="09.30 - 11.00"-->
+                <!--android:textSize="12sp"/>-->
+                <!--</RelativeLayout>-->
+                <!--</RelativeLayout>-->
+                <!--</android.support.v7.widget.CardView>-->
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

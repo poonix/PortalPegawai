@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "72545321151",
+    "firebase_url": "https://pnm-portal-pegawai.firebaseio.com",
+    "project_id": "pnm-portal-pegawai",
+    "storage_bucket": "pnm-portal-pegawai.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72545321151:android:d608ccc2cd88ac28",
+        "android_client_info": {
+          "package_name": "com.duaruang.pnmportal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "72545321151-li18v27ofvq4m7i0vqtphh51lufin2g6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.duaruang.pnmportal",
+            "certificate_hash": "84cc6e8bb9359e91753ec4b64c752201648e44a1"
+          }
+        },
+        {
+          "client_id": "72545321151-1slj8i5vioa7su3rurp2n3sco7sl3agm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB23rbV3Bg_Bn9P_DmfgN44bpBKr7l5qp0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "72545321151-1slj8i5vioa7su3rurp2n3sco7sl3agm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

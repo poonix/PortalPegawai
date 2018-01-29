@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.duaruang.pnmportal.activity.EventMateriActivity"
+    tools:showIn="@layout/activity_event_materi">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_judul_materi_download"
+            android:paddingTop="10dp"
+            android:paddingRight="8dp"
+            android:textColor="#505050"
+            android:paddingLeft="8dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/materialize_typography_headline"
+            android:textStyle="bold"
+            android:text="Materi"/>
+
+        <!-- List View -->
+        <View
+            android:id="@+id/border"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+
+            android:layout_marginTop="14dp"
+            android:background="#d3d3d3"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_materi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/border"/>
+    </LinearLayout>
+
+
+
+</android.support.design.widget.CoordinatorLayout>

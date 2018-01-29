@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.duaruang.pnmportal.activity.AbsensiActivity"
+    tools:showIn="@layout/activity_absensi">
+
+    <!-- Editext for Search -->
+    <!--<EditText android:id="@+id/inputSearchFaq"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:hint="Search.."-->
+    <!--android:inputType="textVisiblePassword"-->
+    <!--android:layout_alignParentTop="true"/>-->
+    <TextView
+        android:id="@+id/judul_absensi"
+        android:paddingTop="10dp"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:layout_marginLeft="15dp"
+        android:textColor="#505050"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/materialize_typography_headline"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:text="Absensi"/>
+
+    <!-- List View -->
+    <View
+        android:id="@+id/border"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/judul_absensi"
+        android:layout_marginTop="14dp"
+        android:background="#d3d3d3"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:progressBarStyle"
+        android:indeterminate="true"
+        android:indeterminateTintMode="src_in"
+        android:indeterminateTint="@color/md_blue_400"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/border"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_absensi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/border"/>
+
+</RelativeLayout>

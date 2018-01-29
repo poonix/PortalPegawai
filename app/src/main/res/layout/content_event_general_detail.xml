@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.duaruang.pnmportal.activity.EventGeneralDetailActivity"
+    tools:showIn="@layout/activity_event_general_detail">
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/LinearLayout1">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardview_dashboard_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardElevation="10dp"
+                card_view:cardCornerRadius="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/rundown_icon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/iconevent" />
+
+                        <TextView
+                            android:id="@+id/event_general_detail_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_toEndOf="@+id/rundown_icon"
+                            android:text="Title"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_gravity="fill_horizontal" />
+
+                        <TextView
+                            android:id="@+id/event_general_detail_tanggal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignStart="@+id/event_general_detail_title"
+                            android:text="Tanggal"
+                            android:paddingBottom="5sp"
+                            android:textColor="@color/md_blue_500"
+                            android:textSize="12sp"
+                            app:layout_gravity="fill_horizontal" />
+                    </RelativeLayout>
+
+
+                    <com.duaruang.pnmportal.helper.WrapContentDraweeView
+                        android:id="@+id/event_general_detail_image"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_medium">
+
+                        <me.biubiubiu.justifytext.library.JustifyTextView
+                            android:id="@+id/event_general_detail_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingMultiplier="1.2"
+                            android:paddingBottom="@dimen/margin_small"
+                            android:text="@string/lorem_ipsum"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>
