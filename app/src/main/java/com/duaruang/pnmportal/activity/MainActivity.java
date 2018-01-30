@@ -25,6 +25,7 @@ import com.duaruang.pnmportal.data.News;
 import com.duaruang.pnmportal.data.Pegawai;
 import com.duaruang.pnmportal.firebase.AppFirebaseMessageService;
 import com.duaruang.pnmportal.firebase.AppNotificationManager;
+import com.duaruang.pnmportal.preference.AppPreference;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -53,10 +54,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        //Fetching email from shared preferences
-        SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        String username = sharedPreferences.getString(Pegawai.TAG_USERNAME,"Not Available");
 
     }
 
@@ -149,19 +146,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
 
-                        //Getting out sharedpreferences
-                        SharedPreferences preferences = getSharedPreferences(Config.SHARED_PREF_NAME,Context.MODE_PRIVATE);
-                        //Getting editor
-                        SharedPreferences.Editor editor = preferences.edit();
-
-                        //Puting the value false for loggedin
-                        editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, false);
-
-                        //Putting blank value to email
-                        editor.putString(Pegawai.TAG_USERNAME, "");
-
-                        //Saving the sharedpreferences
-                        editor.commit();
+                        AppPreference.getInstance().clearData();
 
                         //Starting login activity
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);

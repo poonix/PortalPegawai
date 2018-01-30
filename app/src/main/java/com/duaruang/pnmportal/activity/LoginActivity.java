@@ -29,8 +29,14 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.duaruang.pnmportal.R;
 import com.duaruang.pnmportal.config.Config;
+import com.duaruang.pnmportal.data.LoginSSOResponse;
 import com.duaruang.pnmportal.data.Pegawai;
+import com.duaruang.pnmportal.firebase.AppFirebaseIDService;
 import com.duaruang.pnmportal.helper.VolleyErrorHelper;
+import com.duaruang.pnmportal.preference.AppPreference;
+import com.duaruang.pnmportal.rest.ApiConstant;
+import com.duaruang.pnmportal.rest.RestHelper;
+import com.duaruang.pnmportal.rest.RestService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,12 +47,17 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private final String LOG_TAG = LoginActivity.class.getSimpleName();
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
-
+    private AppPreference appPreference = AppPreference.getInstance();
+    private Call<LoginSSOResponse> callLoginSSO;
+    private RestService serviceSSO = RestHelper.getInstanceSSO().getRestService();
     @BindView(R.id.input_username) EditText _usernameText;
     @BindView(R.id.input_password) EditText _passwordText;
     @BindView(R.id.btn_login) Button _loginButton;
@@ -72,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 hideSoftKeyboard(LoginActivity.this, v);
-                login();
+                doLoginSSO();
 //                loginmockup();
             }
         });
@@ -98,12 +109,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //In onresume fetching value from sharedpreference
-        SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME,Context.MODE_PRIVATE);
-
-        //Fetching the boolean value form sharedpreferences
-        loggedIn = sharedPreferences.getBoolean(Config.LOGGEDIN_SHARED_PREF, false);
-
         //If we will get true
         if(loggedIn){
             //We will start the Profile Activity
@@ -112,50 +117,6 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
     }
-
-    /*Loginmockup()*/
-    public void loginmockup() {
-        Log.d(TAG, "Login");
-
-        if (!validate()) {
-            onLoginFailed();
-            return;
-        }
-        pb.setVisibility(View.VISIBLE);
-
-        _loginButton.setEnabled(false);
-
-
-        final String username = _usernameText.getText().toString();
-        final String password = _passwordText.getText().toString();
-
-        // TODO: Implement your own authentication logic here.
-
-
-        //Creating a shared preference
-        SharedPreferences sharedPreferences = LoginActivity.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-
-        //Creating editor to store values to shared preferences
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        //Adding values to editor
-        editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
-        editor.putString(Pegawai.TAG_USERNAME, username);
-
-        //Saving values to editor
-        editor.commit();
-
-        onLoginSuccess();
-
-        //Starting profile activity
-        Intent intent = new Intent(LoginActivity.this, MainDrawerActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-
-    }
-
-    /*end loginmockup()*/
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
@@ -174,7 +135,58 @@ public class LoginActivity extends AppCompatActivity {
         return super.dispatchTouchEvent( event );
     }
 
+    public void doLoginSSO() {
+        if (!validate()) {
+            onLoginFailed();
+            return;
+        }
+        pb.setVisibility(View.VISIBLE);
 
+        _loginButton.setEnabled(false);
+
+        final String username = _usernameText.getText().toString();
+        final String password = _passwordText.getText().toString();
+        callLoginSSO = serviceSSO.loginSSO(ApiConstant.LOGIN_SSO, username, password, "PKM");
+        callLoginSSO.enqueue(new Callback<LoginSSOResponse>() {
+            @Override
+            public void onResponse(Call<LoginSSOResponse> call, retrofit2.Response<LoginSSOResponse> response) {
+                Log.d(LOG_TAG, "doLoginSSO.onResponse " + (response != null ? response.body():""));
+
+                    if (response != null && response.body() != null) {
+                        String errMsg = (response.body().getLogin() != null && response.body().getLogin().size() > 0 && response.body().getLogin().get(0) != null) ? response.body().getLogin().get(0).getMessage() : "";
+                        if (response.body().isSuccessResponse() && response.body().getUserLoggedin() != null) {
+                            appPreference.setUserLoggedIn(response.body().getUserLoggedin());
+                            loggedIn = true;
+                            //Starting profile activity
+                            onLoginSuccess();
+                            AppFirebaseIDService.resendFcmId();
+                            Intent intent = new Intent(LoginActivity.this, MainDrawerActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Throwable tt = new Throwable("Login SSO Failed!\n" + errMsg);
+                            onLoginFailed();
+                            Toast.makeText(LoginActivity.this, "Invalid username or password", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Throwable tt = new Throwable("Login SSO Failed!");
+                        onLoginFailed();
+                        Toast.makeText(LoginActivity.this, "Login SSO Failed!", Toast.LENGTH_LONG).show();
+                        //  Crashlytics.logException(tt);
+                    }
+            }
+
+            @Override
+            public void onFailure(Call<LoginSSOResponse> call, Throwable t) {
+                Log.d(LOG_TAG, "doLoginSSO.onFailure " + (t != null ? t.getMessage() : ""));
+                onLoginFailed();
+                Toast.makeText(LoginActivity.this, "Network Timeout, coba lagi!", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    /*
     public void login() {
         Log.d(TAG, "Login");
 
@@ -236,11 +248,6 @@ public class LoginActivity extends AppCompatActivity {
                         if (message !=null) {
                             //If we are getting success from server
                             if (message.equalsIgnoreCase(Config.LOGIN_SUCCESS)) {
-                                //Creating a shared preference
-                                SharedPreferences sharedPreferences = LoginActivity.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-
-                                //Creating editor to store values to shared preferences
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
 
 
                                 try {
@@ -253,22 +260,12 @@ public class LoginActivity extends AppCompatActivity {
 
                                         Log.d("Pegawai nama: ", dataObj.getString(Pegawai.TAG_NAMA));
                                         //Adding values to editor
-                                        editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
-                                        editor.putString(Pegawai.TAG_USERNAME, dataObj.getString(Pegawai.TAG_USERNAME));
-                                        editor.putString(Pegawai.TAG_EMAIL, dataObj.getString(Pegawai.TAG_EMAIL));
-                                        editor.putString(Pegawai.TAG_NIK, dataObj.getString(Pegawai.TAG_NIK));
-                                        editor.putString(Pegawai.TAG_NAMA, dataObj.getString(Pegawai.TAG_NAMA));
-                                        editor.putString(Pegawai.TAG_POSISI_NAMA, dataObj.getString(Pegawai.TAG_POSISI_NAMA));
-                                        editor.putString(Pegawai.TAG_POSISI_NAMA, dataObj.getString(Pegawai.TAG_POSISI_NAMA));
-                                        editor.putString(Pegawai.TAG_IDSDM, dataObj.getString(Pegawai.TAG_IDSDM));
+                                        //appPreference.setUserLoggedIn(response);
 
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-
-                                //Saving values to editor
-                                editor.commit();
 
 
                                 onLoginSuccess();
@@ -327,7 +324,7 @@ public class LoginActivity extends AppCompatActivity {
         };
 
         queue.add(stringRequest);
-    }
+    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -372,15 +369,15 @@ public class LoginActivity extends AppCompatActivity {
 //            _usernameText.setError(null);
 //        }
 
-        if (username.isEmpty() || username.length() < 4 || username.length() > 20) {
-            _usernameText.setError("between 4 and 10 alphanumeric characters");
+        if (username.isEmpty() || username.length() < 4 || username.length() > 100) {
+            _usernameText.setError("between 4 and 100 alphanumeric characters");
             valid = false;
         } else {
             _usernameText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 20) {
-            _passwordText.setError("between 4 and 10 alphanumeric characters");
+        if (password.isEmpty() || password.length() < 4 || password.length() > 100) {
+            _passwordText.setError("between 4 and 100 alphanumeric characters");
             valid = false;
         } else {
             _passwordText.setError(null);

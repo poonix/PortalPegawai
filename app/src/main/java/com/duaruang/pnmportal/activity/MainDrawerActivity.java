@@ -27,6 +27,7 @@ import com.duaruang.pnmportal.data.Pegawai;
 import com.duaruang.pnmportal.firebase.AppFirebaseMessageService;
 import com.duaruang.pnmportal.firebase.AppNotificationManager;
 import com.duaruang.pnmportal.fragment.MainFragment;
+import com.duaruang.pnmportal.preference.AppPreference;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -52,23 +53,7 @@ import io.fabric.sdk.android.Fabric;
 
 public class MainDrawerActivity extends BaseActivity implements MainFragment.OnFragmentInteractionListener{
 
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_drawer);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }*/
-
+    private Pegawai userSSOModel;
     private static final int PROFILE_SETTING = 100000;
 
     //save our header or result
@@ -83,22 +68,16 @@ public class MainDrawerActivity extends BaseActivity implements MainFragment.OnF
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        LayoutInflaterCompat.setFactory(getLayoutInflater(), new IconicsLayoutInflater(getDelegate()));
+//      LayoutInflaterCompat.setFactory(getLayoutInflater(), new IconicsLayoutInflater(getDelegate()));
 
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main_drawer);
+//      setContentView(R.layout.activity_main_drawer);
         Fabric.with(this, new Crashlytics());
         //Fetching data from shared preferences
-        SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        username = sharedPreferences.getString(Pegawai.TAG_USERNAME,"Username");
-        email = sharedPreferences.getString(Pegawai.TAG_EMAIL,"user@email.com");
-        boolean loggedin = sharedPreferences.getBoolean(Config.LOGGEDIN_SHARED_PREF, false);
-        if (!loggedin){
-            Intent intent = new Intent(MainDrawerActivity.this, LoginActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
-        }
+        userSSOModel    = AppPreference.getInstance().getUserSSOLoggedIn();
+        username        = userSSOModel.getUsername();
+        email           = userSSOModel.getEmail();
+
         //Remove line to test RTL support
         //getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
 
@@ -313,20 +292,7 @@ public class MainDrawerActivity extends BaseActivity implements MainFragment.OnF
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
 
-                        //Getting out sharedpreferences
-                        SharedPreferences preferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-                        //Getting editor
-                        SharedPreferences.Editor editor = preferences.edit();
-
-                        //Puting the value false for loggedin
-                        editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, false);
-
-                        //Putting blank value to email
-                        editor.putString(Pegawai.TAG_EMAIL, "");
-
-                        //Saving the sharedpreferences
-                        editor.commit();
-
+                        AppPreference.getInstance().clearData();
                         //Starting login activity
                         Intent intent = new Intent(MainDrawerActivity.this, LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -385,9 +351,8 @@ public class MainDrawerActivity extends BaseActivity implements MainFragment.OnF
         //onResume happens after onStart and onActivityCreate
         super.onResume();
 
-        SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        username = sharedPreferences.getString(Pegawai.TAG_USERNAME,"Username");
-        email = sharedPreferences.getString(Pegawai.TAG_EMAIL,"user@email.com");
+        username = userSSOModel.getUsername();
+        email = userSSOModel.getEmail();
 
         if (TextUtils.equals("Username", username)){
             //Starting login activity
