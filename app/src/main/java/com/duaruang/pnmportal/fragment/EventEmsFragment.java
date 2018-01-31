@@ -37,6 +37,7 @@ import com.duaruang.pnmportal.data.EventEms;
 import com.duaruang.pnmportal.data.Pegawai;
 import com.duaruang.pnmportal.helper.DividerItemDecoration;
 import com.duaruang.pnmportal.helper.VolleyErrorHelper;
+import com.duaruang.pnmportal.preference.AppPreference;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
 
@@ -57,7 +58,7 @@ import butterknife.Unbinder;
 public class EventEmsFragment extends Fragment {
 
     public EventEmsFragment(){}
-
+    private AppPreference appPreference = AppPreference.getInstance();
     @BindView(R.id.inputSearchEvent) EditText inputSearch;
     @BindView(R.id.recyclerview_event) RecyclerView mainEventRecyclerView;
     @BindView(R.id.progress_bar)
@@ -91,7 +92,6 @@ public class EventEmsFragment extends Fragment {
         inputSearch.setError(null);
         inputSearch.setCompoundDrawablesWithIntrinsicBounds(null, null, icon_search, null);
 
-        sharedPreferences = getActivity().getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
 
         mainEventRecyclerView.setHasFixedSize(true);
         mainEventRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -124,7 +124,7 @@ public class EventEmsFragment extends Fragment {
     private void loadEvent() {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
-        final String idsdm =  sharedPreferences.getString(Pegawai.TAG_IDSDM,"B0000000000000000000000");
+        final String idsdm =  appPreference.getUserSSOLoggedIn().getIdsdm();
         String url = Config.KEY_URL_EVENT_EMS + idsdm;
 //        String url = Config.KEY_URL_EVENT_EMS + "B0BA88CF0E61B42E50B3BCF968579979";
 

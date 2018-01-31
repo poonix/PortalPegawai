@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.duaruang.pnmportal.R;
 import com.duaruang.pnmportal.config.Config;
 import com.duaruang.pnmportal.data.Pegawai;
+import com.duaruang.pnmportal.preference.AppPreference;
 
 import net.glxn.qrgen.android.QRCode;
 
@@ -36,6 +37,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ProfileScreenActivity extends AppCompatActivity {
+
+    private AppPreference appPreference = AppPreference.getInstance();
 
     @BindView(R.id.profile_toolbar) Toolbar toolbar;
     @BindView(R.id.user_profile_name)
@@ -68,19 +71,18 @@ public class ProfileScreenActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Fetching data from shared preferences
-        SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        userProfileName.setText(sharedPreferences.getString(Pegawai.TAG_NAMA,"John Doe"));
-        userProfileEmail.setText(sharedPreferences.getString(Pegawai.TAG_EMAIL,"user@email.com"));
+        userProfileName.setText(appPreference.getUserSSOLoggedIn().getNama());
+        userProfileEmail.setText(appPreference.getUserSSOLoggedIn().getEmail());
         //tvIdsdm.setText(sharedPreferences.getString(Pegawai.TAG_IDSDM,"B0000000000000000000000"));
-        tvNik.setText(sharedPreferences.getString(Pegawai.TAG_NIK,"11111111"));
-        tvPosisi.setText(sharedPreferences.getString(Pegawai.TAG_POSISI_NAMA,"karyawan"));
+        tvNik.setText(appPreference.getUserSSOLoggedIn().getNik());
+        tvPosisi.setText(appPreference.getUserSSOLoggedIn().getPosisiNama());
 
-        idsdm = sharedPreferences.getString(Pegawai.TAG_IDSDM,"B0000000000000000000000");
-        nip = sharedPreferences.getString(Pegawai.TAG_NIK,"11111111");
-        nama = sharedPreferences.getString(Pegawai.TAG_NAMA,"John Doe");
-        posisi = sharedPreferences.getString(Pegawai.TAG_POSISI_NAMA,"karyawan");
-        unit_kerja = sharedPreferences.getString(Pegawai.TAG_UNIT,"IT Dev");
-        email = sharedPreferences.getString(Pegawai.TAG_EMAIL,"user@email.com");
+        idsdm = appPreference.getUserSSOLoggedIn().getIdsdm();
+        nip = appPreference.getUserSSOLoggedIn().getNik();
+        nama = appPreference.getUserSSOLoggedIn().getNama();
+        posisi = appPreference.getUserSSOLoggedIn().getPosisiNama();
+        unit_kerja = appPreference.getUserSSOLoggedIn().getUnit();
+        email = appPreference.getUserSSOLoggedIn().getEmail();
 
 
         Bitmap idsdmQRreal = QRCode.from(idsdm).bitmap();

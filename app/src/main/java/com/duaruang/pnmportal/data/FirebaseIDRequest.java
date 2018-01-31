@@ -22,29 +22,20 @@ public class FirebaseIDRequest {
         }
          */
 
-    @SerializedName("fcm")
-    @Expose
-    private List<DataFCM> fcmList;
 
-    public FirebaseIDRequest(String idSdm, String idFcm) {
-        buildRequest(idSdm, idFcm);
+    public FirebaseIDRequest(int idUserGroup,String idFcm) {
+        setIdFcm(idFcm);
+        setIdUserGroup(idUserGroup);
     }
 
-    private void buildRequest(String idSdm, String idFcm) {
-        DataFCM fcm = new DataFCM();
-        fcm.setIdsdm(idSdm);
-        fcm.setIdFcm(idFcm);
-        fcmList = new ArrayList<>();
-        fcmList.add(fcm);
-    }
 
-    class DataFCM {
-        @SerializedName("id_fcm")
+
+        @SerializedName("fcm")
         @Expose
         private String idFcm;
-        @SerializedName("idsdm")
+        @SerializedName("idusergroup")
         @Expose
-        private String idsdm;
+        private int idUserGroup;
 
         public String getIdFcm() {
             return idFcm;
@@ -54,12 +45,12 @@ public class FirebaseIDRequest {
             this.idFcm = idFcm;
         }
 
-        public String getIdsdm() {
-            return idsdm;
+        public int getIdUserGroup() {
+            return idUserGroup;
         }
 
-        public void setIdsdm(String idsdm) {
-            this.idsdm = idsdm;
+        public void setIdUserGroup(int idUserGroup) {
+            this.idUserGroup = idUserGroup;
         }
-    }
+
 }

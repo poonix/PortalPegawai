@@ -27,8 +27,10 @@ public interface RestService {
             @Query("app_code") String appCode
     );
 
-    @POST(ApiConstant.FIREBASE_ID)
+    @POST
+            //(ApiConstant.FIREBASE_ID)
     Call<BaseResponse> sendFcmId(
+            @Url String url,
             @Body FirebaseIDRequest body
     );
 }

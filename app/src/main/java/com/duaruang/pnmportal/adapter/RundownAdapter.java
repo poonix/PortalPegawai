@@ -66,7 +66,7 @@ public class RundownAdapter extends
         viewHolder.tvKegiatan.setText(rundown.getNamaKegiatan());
         viewHolder.tvPic.setText(rundown.getPic());
      //   viewHolder.tvKeterangan.setText(rundown.getKeterangan());
-    //    viewHolder.tvTanggal.setText(rundown.getTanggal());
+        viewHolder.tvTanggal.setText(rundown.getTanggal());
         viewHolder.tvWaktu.setText(rundown.getWaktu());
 
 
@@ -85,7 +85,7 @@ public class RundownAdapter extends
             super(itemLayoutView);
 
             tvKegiatan = (TextView) itemLayoutView.findViewById(R.id.tv_kegiatan);
-         //   tvTanggal = (TextView) itemLayoutView.findViewById(R.id.tv_tanggal);
+            tvTanggal = (TextView) itemLayoutView.findViewById(R.id.tv_tanggal);
           //  tvKeterangan = (TextView) itemLayoutView.findViewById(R.id.tv_keterangan);
             tvPic = (TextView) itemLayoutView.findViewById(R.id.tv_pic);
             tvWaktu = (TextView) itemLayoutView.findViewById(R.id.tv_waktu);

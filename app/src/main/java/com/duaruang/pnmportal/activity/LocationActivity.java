@@ -11,6 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,6 +69,10 @@ public class LocationActivity extends BaseActivity implements OnMapReadyCallback
     TextView lokasiKerja;
     @BindView(R.id.nama_tempat)
     TextView namaTempat;
+    @BindView(R.id.btn_open_map)
+    Button openMapp;
+    @BindView(R.id.WrMap)
+    RelativeLayout mappLayout;
 
     String idevent;
 
@@ -108,23 +115,27 @@ public class LocationActivity extends BaseActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        if(lat.isEmpty()|| lng.isEmpty()) {
+        }else{
 
-        // Add a marker in Sydney and move the camera
-        LatLng eventLocation = new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
-        mMap.addMarker(new MarkerOptions().position(eventLocation).title("Location"));
+            mMap = googleMap;
+
+            // Add a marker in Sydney and move the camera
+            LatLng eventLocation = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
+            mMap.addMarker(new MarkerOptions().position(eventLocation).title("Location"));
 //        if (ActivityCompat.checkSelfPermission(this,
 //                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
 //                ActivityCompat.checkSelfPermission(this,
 //                        android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 //            return;
 //        }
-        try {
-            float zoomLevel = 16.0f; //This goes up to 21
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(eventLocation, zoomLevel));
-        } catch (IllegalArgumentException e){
-            Log.e("Error: ",""+e.getMessage());
-            e.printStackTrace();
+            try {
+                float zoomLevel = 16.0f; //This goes up to 21
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(eventLocation, zoomLevel));
+            } catch (IllegalArgumentException e) {
+                Log.e("Error: ", "" + e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 
@@ -192,6 +203,12 @@ public class LocationActivity extends BaseActivity implements OnMapReadyCallback
                                             lokasiKerja.setText(locObj.getString("lokasi_kerja"));
                                             namaTempat.setText(nama_tempat);
                                             lokasi_kerja = locObj.getString("lokasi_kerja");
+
+                                            if (lat.isEmpty() || lng.isEmpty())
+                                            {
+                                                openMapp.setVisibility(View.GONE);
+                                                mappLayout.setVisibility(View.GONE);
+                                            }
 
                                         }
 

@@ -11,10 +11,11 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class AppFirebaseMessageService extends FirebaseMessagingService {
     private static final String TAG = AppFirebaseMessageService.class.getSimpleName();
-    public static final String TYPE_EVENT = "event";
-    public static final String TYPE_NEWS_GENERAL = "news_general";
-    public static final String TYPE_NEWS_PRIVATE = "news_private";
-    public static final String TYPE_FORCE_LOGOUT = "force_logout";
+    public static final String TYPE_EVENTEMS        = "event_ems";
+    public static final String TYPE_EVENT           = "event_general";
+    public static final String TYPE_NEWS_GENERAL    = "news_general";
+    public static final String TYPE_NEWS_PRIVATE    = "news_private";
+    public static final String TYPE_FORCE_LOGOUT    = "force_logout";
 
     private static final String HEADER_TAG = "tag";
     private static final String HEADER_TITLE = "title";

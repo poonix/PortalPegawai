@@ -45,6 +45,15 @@ public class RestHelper {
         return sInstanceSSO;
     }
 
+    public static RestHelper getInstance() {
+        synchronized (LOCK) {
+            if (sInstance == null) {
+                sInstance = new RestHelper(preference.getApiHostSso(), ApiConstant.USER_AUTH, ApiConstant.PASSWORD_AUTH);
+            }
+        }
+        return sInstance;
+    }
+
 
     public static void setHostSSO(String host) {
         synchronized (LOCK) {

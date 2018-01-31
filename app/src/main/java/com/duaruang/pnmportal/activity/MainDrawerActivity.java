@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -16,12 +17,15 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.duaruang.pnmportal.config.Config;
+import com.duaruang.pnmportal.data.Event;
+import com.duaruang.pnmportal.data.EventEms;
 import com.duaruang.pnmportal.data.News;
 import com.duaruang.pnmportal.data.Pegawai;
 import com.duaruang.pnmportal.firebase.AppFirebaseMessageService;
@@ -75,8 +79,12 @@ public class MainDrawerActivity extends BaseActivity implements MainFragment.OnF
         Fabric.with(this, new Crashlytics());
         //Fetching data from shared preferences
         userSSOModel    = AppPreference.getInstance().getUserSSOLoggedIn();
-        username        = userSSOModel.getUsername();
-        email           = userSSOModel.getEmail();
+        if(userSSOModel != null) {
+            username = userSSOModel.getUsername();
+            email = userSSOModel.getEmail();
+        }
+
+        Log.v("test username","test"+username);
 
         //Remove line to test RTL support
         //getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
@@ -264,10 +272,13 @@ public class MainDrawerActivity extends BaseActivity implements MainFragment.OnF
                     showNewsDetail(dataModel);
                 } else if (tag!=null && tag.equals(AppFirebaseMessageService.TYPE_NEWS_PRIVATE)) {
                     showNewsDetail(dataModel);
+                }else if (tag!=null && tag.equals(AppFirebaseMessageService.TYPE_EVENTEMS)) {
+                    EventEms dataModEms = bundle.getParcelable(AppNotificationManager.EXTRA_DATA);
+                    showEventEmsDetail(dataModEms);
+                }else if (tag!=null && tag.equals(AppFirebaseMessageService.TYPE_EVENT)) {
+                    Event dataMod = bundle.getParcelable(AppNotificationManager.EXTRA_DATA);
+                    ShowEvent(dataMod);
                 }
-                //} else if (tag!=null && tag.equals(AppFirebaseMessageService.TYPE_EVENT)) {
-                //   showPengajuan(dataModel);
-                //}
             }
         }
     }
@@ -279,6 +290,30 @@ public class MainDrawerActivity extends BaseActivity implements MainFragment.OnF
         intent.putExtra("picture", model.getPicture());
         intent.putExtra("url_download", model.getUrlDownload());
         intent.putExtra("created_date", model.getCreated_date());
+        startActivity(intent);
+    }
+    private void ShowEvent(Event model) {
+        Intent intent = new Intent(this, EventGeneralDetailActivity.class);
+        intent.putExtra("title", model.getTitle());
+        intent.putExtra("description", model.getDescription());
+        intent.putExtra("picture", model.getPicture());
+        intent.putExtra("start_date", model.getStart_date());
+        intent.putExtra("end_date", model.getEnd_date());
+        intent.putExtra("created_date", model.getCreated_date());
+        intent.putExtra("modified_date", model.getModified_date());
+        startActivity(intent);
+    }
+
+    private void showEventEmsDetail(EventEms model) {
+        Intent intent = new Intent(this, EventDetailActivity.class);
+        intent.putExtra("idevent", model.getId_event());
+        intent.putExtra("nomor_memo", model.getNomor_memo());
+        intent.putExtra("nama_event", model.getNama_event());
+        intent.putExtra("topik_event", model.getTopik_event());
+        intent.putExtra("mulai_tanggal_pelaksanaan", model.getMulai_tanggal_pelaksanaan());
+        intent.putExtra("selesai_tanggal_pelaksanaan", model.getSelesai_tanggal_pelaksanaan());
+        intent.putExtra("kategori_event", model.getKategori_event());
+        intent.putExtra("tipe_pelatihan", model.getTipe_pelatihan());
         startActivity(intent);
     }
 
@@ -328,6 +363,20 @@ public class MainDrawerActivity extends BaseActivity implements MainFragment.OnF
     */
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(AppPreference.getInstance().getUserSSOLoggedIn() == null)
+        {
+            return;
+        }
+        else
+        {
+
+        }
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         //add the values which need to be saved from the drawer to the bundle
         outState = result.saveInstanceState(outState);
@@ -351,10 +400,11 @@ public class MainDrawerActivity extends BaseActivity implements MainFragment.OnF
         //onResume happens after onStart and onActivityCreate
         super.onResume();
 
-        username = userSSOModel.getUsername();
-        email = userSSOModel.getEmail();
+        //username = AppPreference.getInstance().getUserSSOLoggedIn().getUsername();
+        //email = AppPreference.getInstance().getUserSSOLoggedIn().getEmail();
 
-        if (TextUtils.equals("Username", username)){
+        if(AppPreference.getInstance().getUserSSOLoggedIn() == null)
+        {
             //Starting login activity
             Intent intent = new Intent(MainDrawerActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);

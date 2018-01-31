@@ -47,7 +47,7 @@ public class AppFirebaseIDService extends FirebaseInstanceIdService {
     }
 
     /*
-    private void sendFirebaseIdToServer1(final String fcmId) {
+    private static void sendFirebaseIdToServer(final String fcmId) {
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -134,9 +134,9 @@ public class AppFirebaseIDService extends FirebaseInstanceIdService {
             return;
         }
 
-        String idSdm = preference.getUserSSOLoggedIn().getIdsdm();
+        int idSdm = 2;
         FirebaseIDRequest request = new FirebaseIDRequest(idSdm, fcmId);
-        Call<BaseResponse> call = RestHelper.getInstanceSSO().getRestService().sendFcmId(request);
+        Call<BaseResponse> call = RestHelper.getInstance().getRestService().sendFcmId(Config.KEY_URL_POST_FCM,request);
         call.enqueue(new Callback<BaseResponse>() {
             @Override
             public void onResponse(Call<BaseResponse> call, retrofit2.Response<BaseResponse> response) {

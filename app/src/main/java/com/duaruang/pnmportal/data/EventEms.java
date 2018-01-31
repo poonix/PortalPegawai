@@ -1,6 +1,9 @@
 package com.duaruang.pnmportal.data;
 
-public class EventEms {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class EventEms implements Parcelable {
 
     private String id_event, nomor_memo, nama_event, topik_event, mulai_tanggal_pelaksanaan,
             selesai_tanggal_pelaksanaan, kategori_event, tipe_pelatihan;
@@ -57,5 +60,45 @@ public class EventEms {
                         "selesai_tanggal_pelaksanaan=%6$s, kategori_event=%7$s, tipe_pelatihan=%8$s]",
                 id_event, nomor_memo, nama_event, topik_event, mulai_tanggal_pelaksanaan,
                 selesai_tanggal_pelaksanaan, kategori_event, tipe_pelatihan);
+    }
+
+    protected EventEms(Parcel in) {
+        id_event = in.readString();
+        nomor_memo = in.readString();
+        nama_event = in.readString();
+        topik_event = in.readString();
+        mulai_tanggal_pelaksanaan = in.readString();
+        selesai_tanggal_pelaksanaan = in.readString();
+        kategori_event = in.readString();
+        tipe_pelatihan = in.readString();
+    }
+
+    public static final Creator<EventEms> CREATOR = new Creator<EventEms>() {
+        @Override
+        public EventEms createFromParcel(Parcel in) {
+            return new EventEms(in);
+        }
+
+        @Override
+        public EventEms[] newArray(int size) {
+            return new EventEms[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id_event);
+        dest.writeString(nomor_memo);
+        dest.writeString(nama_event);
+        dest.writeString(topik_event);
+        dest.writeString(mulai_tanggal_pelaksanaan);
+        dest.writeString(selesai_tanggal_pelaksanaan);
+        dest.writeString(kategori_event);
+        dest.writeString(tipe_pelatihan);
     }
 }

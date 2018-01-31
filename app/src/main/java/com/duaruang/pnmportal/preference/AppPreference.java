@@ -98,7 +98,6 @@ public class AppPreference extends BasePreference {
     }
 
     public void setUserLoggedIn(Pegawai userModel) {
-        //userModel.setIdUserGroup(com.example.saifullah_albasrie.pnm.model.annotation.UserType.MANAGER_UNIT); //TEST MU
         set(USER_SSO, new Gson().toJson(userModel));
     }
 

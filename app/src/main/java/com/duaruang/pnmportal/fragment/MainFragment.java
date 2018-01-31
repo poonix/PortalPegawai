@@ -36,6 +36,7 @@ import com.duaruang.pnmportal.config.Config;
 import com.duaruang.pnmportal.data.News;
 import com.duaruang.pnmportal.data.Pegawai;
 import com.duaruang.pnmportal.helper.VolleyErrorHelper;
+import com.duaruang.pnmportal.preference.AppPreference;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,6 +66,7 @@ public class MainFragment extends Fragment implements BaseSliderView.OnSliderCli
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private AppPreference appPreference = AppPreference.getInstance();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -196,9 +198,13 @@ public class MainFragment extends Fragment implements BaseSliderView.OnSliderCli
         super.onActivityCreated(savedInstanceState);
 
         //Fetching email from shared preferences
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        realname = sharedPreferences.getString(Pegawai.TAG_NAMA,"Nama User");
-        String email = sharedPreferences.getString(Pegawai.TAG_EMAIL,"user@email.com");
+        //SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        if(appPreference.getUserSSOLoggedIn() == null){
+            realname = null;
+        }
+        else{
+            realname = appPreference.getUserSSOLoggedIn().getNama();
+        }
 
         Toast.makeText(getActivity(), "Welcome, "+ realname,
                 Toast.LENGTH_SHORT).show();
@@ -278,7 +284,7 @@ public class MainFragment extends Fragment implements BaseSliderView.OnSliderCli
                                             JSONObject newsObj = newsArray.getJSONObject(i);
 
 //                                            Log.d("banner " + i + ":", newsObj.getString("item_name"));
-                                            url_maps.put(newsObj.getString("link_to"),
+                                            url_maps.put(newsObj.getString("description"),
                                                     Config.KEY_URL_ASSET_CONTENT + newsObj.getString("item_name"));
                                         }
 
@@ -375,11 +381,8 @@ public class MainFragment extends Fragment implements BaseSliderView.OnSliderCli
                         Base64.DEFAULT);
                 headers.put("Authorization", auth);
                 return headers;
-
-
             }
         };
-
         queue.add(stringRequest);
     }
 
