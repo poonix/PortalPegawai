@@ -123,78 +123,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone"/>
-            <!--<android.support.v7.widget.CardView-->
-            <!--android:id="@+id/cardview_dashboard_content"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:elevation="100dp"-->
-            <!--card_view:cardBackgroundColor="@color/cardview_initial_background"-->
-            <!--card_view:cardCornerRadius="8dp"-->
 
-            <!--android:layout_margin="@dimen/margin_tiny"-->
-            <!--&gt;-->
-            <!--<GridLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:rowCount="2"-->
-            <!--android:columnCount="1"-->
-            <!--android:orientation="horizontal" >-->
-            <!--<TextView-->
-            <!--android:id="@+id/fragment_main_cardview_title"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="@dimen/margin_tiny"-->
-            <!--android:layout_gravity="left|top"-->
-            <!--android:text="Title"-->
-            <!--/>-->
-            <!--<TextView-->
-            <!--android:id="@+id/fragment_main_cardview_content"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="left|top"-->
-            <!--android:layout_margin="@dimen/margin_tiny"-->
-            <!--android:text="@string/lorem_ipsum"-->
-            <!--/>-->
-            <!--</GridLayout>-->
-            <!--</android.support.v7.widget.CardView>-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_tiny"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:id="@+id/tv_version"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:textAlignment="center"
+                    android:text="@string/app_version"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@color/cardview_dark_background"
+                    />
 
-            <!--<android.support.v7.widget.CardView-->
-
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:elevation="100dp"-->
-            <!--card_view:cardBackgroundColor="@color/cardview_initial_background"-->
-            <!--card_view:cardCornerRadius="8dp"-->
-            <!--android:layout_margin="@dimen/margin_tiny"-->
-
-            <!--&gt;-->
-            <!--<GridLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:rowCount="2"-->
-            <!--android:columnCount="1"-->
-            <!--android:orientation="horizontal" >-->
-            <!--<TextView-->
-
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="@dimen/margin_tiny"-->
-            <!--android:layout_gravity="left|top"-->
-            <!--android:text="Title"-->
-            <!--/>-->
-            <!--<TextView-->
-
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="left|top"-->
-            <!--android:layout_margin="@dimen/margin_tiny"-->
-            <!--android:text="@string/lorem_ipsum"-->
-            <!--/>-->
-            <!--</GridLayout>-->
-            <!--</android.support.v7.widget.CardView>-->
-
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

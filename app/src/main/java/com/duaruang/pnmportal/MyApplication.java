@@ -15,6 +15,10 @@ import io.fabric.sdk.android.Fabric;
  * Created by indri on 1/30/18.
  */
 
+/*
+* 
+* */
+
 public class MyApplication extends Application {
 
     private static Context context;
